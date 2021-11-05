@@ -6,14 +6,13 @@ import random
 
 
 def lets_play():
-    from statistics import multimode
+    from statistics import mode
     from statistics import median
     
     ready_player = input("Do you want to play the guessing game? Y/N: ")
     guess_count_list = []
     while ready_player == "y":
         random_number = random.randint(1,100)
-        print(random_number)
         name = input("To begin, enter a name: ")
         guess_count = 0
         while lets_play != random_number:
@@ -31,14 +30,15 @@ def lets_play():
                 print("\n{}, you beat the GUESSING game!".format(name))
                 break    
         print("It took you", guess_count, "tries to beat the game.\n")
-        guess_count_list.append(guess_count)
-        mean = sum(guess_count_list)// len(guess_count_list)
-        print("The mean of your game is ", mean)
-        median = sorted(guess_count_list)
-        print("The median of your game is ", median)
-        mode = multimode(guess_count_list)
-        print("The mode of your game is ", mode)
         ready_player = input("Do you want to play the guessing game? Y/N: ")
+        if ready_player == "n":
+            guess_count_list.append(guess_count)
+            mean = sum(guess_count_list)// len(guess_count_list)
+            print("The mean of your game is ", mean)
+            median = median(guess_count_list)
+            print("The median of your game is ", median)
+            mode_player = mode(guess_count_list)
+            print("The mode of your game is ", mode_player)
     else:
         print("Aww sad to see you go. Goodbye {}".format(name))
         
